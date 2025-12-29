@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yaz Kuran Kursu Kayıt Sistemi v3.0</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Status: <span id="islemDurumu">Yeni Kayıt</span></h1> <h1>🕌 Keşkekçi Camii Yaz Kuran Kursu Öğrenci Takip Ve Kayıt Formu</h1>
+            <p>Öğrenci Kayıt ve Takip Paneli</p>
+        </header>
+        
+        <div class="gallery-container">
+            <div class="slider">
+                <img src="camii1.jpeg" class="slide active" alt="Cami 1">
+                <img src="camii2.jpeg" class="slide" alt="Cami 2">
+                <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+                <button class="next" onclick="changeSlide(1)">&#10095;</button>
+            </div>
+        </div>
+
+        <form id="kayitFormu">
+            <input type="hidden" id="editIndex" value="-1"> 
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Öğrenci Ad Soyad</label>
+                    <input type="text" id="adSoyad" placeholder="Örn: Ahmet Yılmaz" required>
+                </div>
+                <div class="form-group">
+                    <label>Veli Telefon</label>
+                    <input type="tel" id="telNo" placeholder="05XX XXX XX XX" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Eğitim Grubu</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="grup" value="Elif-Ba" checked> Elif-Ba (55 Sayfa)</label>
+                    <label><input type="radio" name="grup" value="Kur'an-ı Kerim"> Kur'an-ı Kerim (30 Cüz)</label>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Hoca Seçimi (Limit: 5)</label>
+                    <select id="hocaSecimi" required>
+                        <option value="">Seçiniz...</option>
+                        <option value="Hasan Karaman">Hasan Karaman</option>
+                        <option value="Ali Kaplan">Ali Kaplan</option>
+                        <option value="Ömer Faruk">Ömer Faruk</option>
+                        <option value="Zeynep Yıldız">Zeynep Yıldız</option>
+                        <option value="Ayşe Demir">Ayşe Demir</option>
+                        <option value="Osman Nuri">Osman Nuri</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label id="cuzEtiket">Bulunduğu Sayfa (1-55)</label>
+                    <input type="number" id="cuzNo" min="1" max="55" value="1" required>
+                </div>
+            </div>
+
+            <button type="submit" id="kaydetBtn">KAYDI TAMAMLA VE LİSTEYE EKLE</button>
+            <button type="button" id="vazgecBtn" style="display:none; background-color: #666;">İPTAL</button>
+        </form>
+
+        <div class="stats">
+            <span id="toplamOgrenci">Toplam Kayıt: 0</span>
+        </div>
+
+        <div class="list-section">
+            <table id="ogrenciTablosu">
+                <thead>
+                    <tr>
+                        <th>Ad Soyad</th>
+                        <th>Telefon</th>
+                        <th>Hoca</th>
+                        <th>Grup</th>
+                        <th>Durum</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+:root { --main: #2e7d32; --dark: #1b5e20; --blue: #0277bd; --red: #c62828; --bg: #f5f6fa; }
+body { font-family: 'Segoe UI', sans-serif; background: var(--bg); display: flex; justify-content: center; padding: 20px; color: #333; }
+.container { background: white; width: 100%; max-width: 900px; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 10px solid var(--main); }
+header { text-align: center; margin-bottom: 30px; }
+header h1 { margin: 0; color: var(--main); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.form-group { margin-bottom: 15px; }
+label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
+input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px; }
+.radio-group { display: flex; gap: 20px; background: #f1f8e9; padding: 12px; border-radius: 8px; border: 1px solid #c8e6c9; }
+button[type="submit"] { width: 100%; padding: 15px; background: var(--main); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px; margin-top: 10px; transition: 0.3s; }
+button[type="submit"]:hover { background: var(--dark); }
+.stats { margin-top: 20px; font-weight: bold; color: var(--main); text-align: right; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td { padding: 12px; border-bottom: 1px solid #eee; text-align: left; }
+th { background: #f8f9fa; color: var(--main); font-size: 13px; text-transform: uppercase; }
+.badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }
+.b-elif { background: #fff3e0; color: #ef6c00; }
+.b-kuran { background: #e8f5e9; color: #2e7d32; }
+.btn-sm { padding: 6px 12px; border: none; border-radius: 5px; color: white; cursor: pointer; font-size: 12px; font-weight: bold; }
+.btn-edit { background: var(--blue); margin-right: 5px; }
+.btn-delete { background: var(--red); }
+.gallery-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 20px auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.slider {
+    display: flex;
+    position: relative;
+    height: 300px; /* Fotoğraf yüksekliği */
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Resmi bozmadan kutuya sığdırır */
+    display: none; /* Hepsini gizle */
+}
+
+.slide.active {
+    display: block; /* Sadece aktif olanı göster */
+}
+
+/* Ok Butonları */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    padding: 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.prev:hover, .next:hover { background: rgba(0,0,0,0.8); }
+.next { right: 0; border-radius: 5px 0 0 5px; }
+.prev { left: 0; border-radius: 0 5px 5px 0; }
