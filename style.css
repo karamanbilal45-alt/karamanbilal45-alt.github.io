@@ -64,3 +64,60 @@ th { background: #f8f9fa; color: var(--main); font-size: 13px; text-transform: u
 .prev:hover, .next:hover { background: rgba(0,0,0,0.8); }
 .next { right: 0; border-radius: 5px 0 0 5px; }
 .prev { left: 0; border-radius: 0 5px 5px 0; }
+/* --- MOBİL UYUMLULUK DÜZENLEMELERİ --- */
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px; /* Kenar boşluklarını azalt */
+    }
+
+    .container {
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    header h1 {
+        font-size: 20px; /* Başlığı küçült */
+    }
+
+    /* Yan yana olan alanları alt alta getir */
+    .form-row {
+        grid-template-columns: 1fr; 
+        gap: 0;
+    }
+
+    /* Radyo butonları (Elif-Ba/Kuran) dikey yap */
+    .radio-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Slider yüksekliğini telefonlar için optimize et */
+    .slider {
+        height: 200px;
+    }
+
+    /* TABLO DÜZENLEMESİ: Ekranın taşmasını önler */
+    .list-section {
+        overflow-x: auto; /* Tablo geniş gelirse sağa kaydırılabilir yapar */
+        -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+        min-width: 600px; /* Tablonun çok sıkışmasını önler, kaydırmayı tetikler */
+    }
+
+    th, td {
+        padding: 8px;
+        font-size: 13px;
+    }
+
+    /* Butonları mobilde daha kolay tıklanabilir yap (daha büyük) */
+    .btn-sm {
+        padding: 10px;
+        display: inline-block;
+        margin-bottom: 5px;
+        width: 100%; /* Butonları alt alta ve tam genişlik yap */
+        text-align: center;
+    }
+}
