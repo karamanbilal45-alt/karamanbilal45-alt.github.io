@@ -92,39 +92,4 @@ window.changeSlide = function(n) {
     slides[currentSlide].classList.add('active');
 
 };
-function sinirlariGuncelle() {
-    const grup = document.querySelector('input[name="grup"]:checked').value;
-    const cuzNoInput = document.getElementById('cuzNo');
-    const cuzEtiket = document.getElementById('cuzEtiket');
 
-    if (grup === "Elif-Ba") {
-        cuzEtiket.innerText = "Bulunduğu Sayfa (1-55)";
-        cuzNoInput.max = 55;
-        // Eğer mevcut değer 55'ten büyükse 55'e çek
-        if (cuzNoInput.value > 55) cuzNoInput.value = 55;
-    } else {
-        cuzEtiket.innerText = "Bulunduğu Cüz (1-30)";
-        cuzNoInput.max = 30;
-        // Eğer mevcut değer 30'dan büyükse 30'a çek
-        if (cuzNoInput.value > 30) cuzNoInput.value = 30;
-    }
-}
-
-// Düzenle butonuna basıldığında da sınırların doğru gelmesi için 
-// duzenle() fonksiyonunun içine sinirlariGuncelle() komutunu eklemelisiniz:
-window.duzenle = function(index) {
-    const ogrenci = ogrenciler[index];
-    // ... diğer atamalar ...
-    
-    const radyolar = document.getElementsByName('grup');
-    radyolar.forEach(r => {
-        if(r.value === ogrenci.grup) r.checked = true;
-    });
-
-    sinirlariGuncelle(); // Sınırları ve etiketi yenile
-    document.getElementById('cuzNo').value = ogrenci.cuz; // Değeri sonra ata
-    
-    editIndex = index;
-    kaydetBtn.innerText = "BİLGİLERİ GÜNCELLE";
-    window.scrollTo(0, 0);
-};
