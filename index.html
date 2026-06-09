@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEGMENT VIP AUTOMOTIVE</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ÜST İLETİŞİM ALANI (TOP BAR) -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="contact-info">
+                <span>📞 Telefon: +90 555 555 55 55</span>
+                <span>📍 Adres: Kütahya, Türkiye</span>
+                <span>✉️ E-posta: info@segmentvip.com</span>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">SEGMENT VIP AUTOMOTIVE</div>
+        <ul class="nav-links">
+            <li><a href="#" onclick="showSection('user-view')">Anasayfa</a></li>
+            <li><a href="#" onclick="openAdmin()">Yönetici Paneli</a></li>
+        </ul>
+    </nav>
+
+    <section id="user-view">
+        <header class="hero">
+            <h1>Hayalindeki Araca Sahip Ol</h1>
+            <p>En prestijli markalar, en özel fiyatlarla sizleri bekliyor.</p>
+        </header>
+
+        <section class="filter-section">
+            <div class="filter-container">
+                <div class="filter-group">
+                    <select id="filterBrand" onchange="applyFilters()">
+                        <option value="">Tüm Markalar</option>
+                    </select>
+                    <input type="number" id="minPrice" placeholder="Min Fiyat" oninput="applyFilters()">
+                    <input type="number" id="maxPrice" placeholder="Max Fiyat" oninput="applyFilters()">
+                    <input type="number" id="maxKm" placeholder="Maksimum KM" oninput="applyFilters()">
+                </div>
+                
+                <div class="sort-group">
+                    <select id="sortOptions" onchange="applyFilters()">
+                        <option value="default">Sıralama Seçin</option>
+                        <option value="price-asc">Fiyat (Önce En Düşük)</option>
+                        <option value="price-desc">Fiyat (Önce En Yüksek)</option>
+                        <option value="km-asc">KM (Önce En Düşük)</option>
+                        <option value="km-desc">KM (Önce En Yüksek)</option>
+                        <option value="year-asc">Yıl (Önce En Eski)</option>
+                        <option value="year-desc">Yıl (Önce En Yeni)</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <main class="car-list-container" id="gallery"></main>
+    </section>
+
+    <!-- DETAY MODAL -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content large">
+            <span class="close" onclick="closeModal('detailModal')">&times;</span>
+            <div id="carDetailContent"></div>
+        </div>
+    </div>
+
+    <section id="admin-view" style="display:none;">
+        <div class="admin-header">
+            <h2>Araç Yönetim Paneli</h2>
+            <button class="btn-add" onclick="openAddModal()">+ Yeni Araç Ekle</button>
+        </div>
+        <div class="admin-table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Görsel</th>
+                        <th>Marka/Model</th>
+                        <th>Fiyat</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody id="adminList"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- MODERNİZE EDİLMİŞ ADMİN MODAL (FORMLAR BÖLÜMLERE AYRILDI) -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content forms-card">
+            <span class="close" onclick="closeModal('adminModal')">&times;</span>
+            <h3 id="modalTitle" class="form-main-title">Araç Bilgileri</h3>
+            
+            <form id="carForm">
+                <input type="hidden" id="editIndex" value=""> 
+                
+                <!-- Bölüm 1: Kimlik ve Fiyat -->
+                <div class="form-section-block">
+                    <h4 class="form-section-title">📌 Genel Bilgiler</h4>
+                    <div class="form-group">
+                        <select id="brand" onchange="updateModelOptions()" required>
+                            <option value="">Marka Seçin</option>
+                        </select>
+                        <select id="model" required>
+                            <option value="">Model Seçin</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" id="year" placeholder="Model Yılı" required>
+                        <input type="number" id="price" placeholder="Fiyat (TL)" required>
+                    </div>
+                </div>
+
+                <!-- Bölüm 2: Teknik Özellikler -->
+                <div class="form-section-block">
+                    <h4 class="form-section-title">⚙️ Teknik Yapı & Durum</h4>
+                    <div class="form-group">
+                        <input type="number" id="km" placeholder="Kilometre" required>
+                        <select id="color" required>
+                            <option value="">Renk Seçin</option>
+                            <option value="Siyah">Siyah</option>
+                            <option value="Beyaz">Beyaz</option>
+                            <option value="Gri">Gri</option>
+                            <option value="Kırmızı">Kırmızı</option>
+                            <option value="Mavi">Mavi</option>
+                            <option value="Sarı">Sarı</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select id="transmission" required>
+                            <option value="">Vites Seçeneği</option>
+                            <option value="Manuel">Manuel</option>
+                            <option value="Otomatik">Otomatik</option>
+                            <option value="Yarı Otomatik">Yarı Otomatik</option>
+                        </select>
+                        <select id="bodyType" required>
+                            <option value="">Kasa Tipi</option>
+                            <option value="Sedan">Sedan</option>
+                            <option value="Hatchback">Hatchback</option>
+                            <option value="SUV">SUV</option>
+                            <option value="Coupé">Coupé</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select id="fuelType" required>
+                            <option value="">Yakıt Tipi</option>
+                            <option value="Benzin">Benzin</option>
+                            <option value="Dizel">Dizel</option>
+                            <option value="LPG">LPG / Benzin</option>
+                            <option value="Elektrik">Elektrik</option>
+                            <option value="Hibrit">Hibrit</option>
+                        </select>
+                        <select id="vehicleStatus" required>
+                            <option value="">Araç Durumu</option>
+                            <option value="Sıfır">Sıfır</option>
+                            <option value="İkinci El">İkinci El</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Bölüm 3: Ekspertiz ve Satış -->
+                <div class="form-section-block">
+                    <h4 class="form-section-title">📊 Ekspertiz & Satış Seçeneği</h4>
+                    <div class="form-group">
+                        <input type="text" id="damageRecord" placeholder="Hasar Kaydı (Örn: Yok veya 5.000 TL)" required>
+                        <select id="tradeStatus" required>
+                            <option value="">Takas Seçeneği</option>
+                            <option value="Var">Takas Var</option>
+                            <option value="Yok">Takas Yok</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Bölüm 4: Açıklama ve Medya -->
+                <div class="form-section-block">
+                    <h4 class="form-section-title">📝 İlan Detayları & Görseller</h4>
+                    <textarea id="description" placeholder="Araç Açıklaması" rows="4"></textarea>
+                    
+                    <div class="photo-inputs-container">
+                        <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom:12px;">
+                            <p style="font-size: 0.85rem; font-weight: bold; color: #e74c3c; margin:0;">Fotoğraflar (Max 10)</p>
+                            <div style="display:flex; gap:5px;">
+                                <button type="button" onclick="addPhotoInput()" class="btn-mini">+ URL Ekle</button>
+                                <button type="button" onclick="document.getElementById('fileUpload').click()" class="btn-mini" style="background:#27ae60;">+ Dosya Seç</button>
+                            </div>
+                            <input type="file" id="fileUpload" hidden multiple accept="image/*" onchange="handleFileUpload(event)">
+                        </div>
+                        <div id="urlInputs"></div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-save">İlanı Sisteme Kaydet</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
